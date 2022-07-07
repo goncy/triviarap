@@ -2,6 +2,7 @@ import type {Video} from "../types";
 
 import {FC, useEffect, useState} from "react";
 import {GetStaticPaths, GetStaticProps} from "next";
+import Cookies from "js-cookie";
 
 import videos from "../videos.json";
 
@@ -42,8 +43,12 @@ const VideoPage: FC<Props> = ({video}) => {
   function handleAnswer(answer: string) {
     if (status !== "playing") return;
 
+    const cookie = (Cookies.get("video") || "").split(",");
+
     setAnswer(answer);
     setStatus("finished");
+
+    Cookies.set("video", cookie.filter(Boolean).concat(video.id).join(","));
   }
 
   useEffect(() => {

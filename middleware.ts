@@ -29,11 +29,6 @@ export default function middleware(req: NextRequest) {
   // Get a response
   const res = NextResponse.rewrite(req.nextUrl);
 
-  // Only set the cookie if its not the rewrited url
-  if (req.nextUrl.search !== "") {
-    res.cookies.set("video", playedVideos.concat(video.id).join(","));
-  }
-
   // Return the response
   return res;
 }
