@@ -12,7 +12,7 @@ export default function middleware(req: NextRequest) {
   let playedVideos = req.cookies.get("video")?.split(",")! || [];
 
   // If we already played all videos, reset the list and the cookie
-  if (playedVideos.length === videos.length) {
+  if (playedVideos.length === videos.length - 1) {
     playedVideos = [];
 
     req.cookies.set("video", playedVideos.join(","));
